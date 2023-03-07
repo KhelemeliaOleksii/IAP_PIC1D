@@ -1,4 +1,4 @@
 #ifndef RUNMODEL_H
     #define RUNMODEL_H
-        void runModel();
-#endif
+        void RunModel();
+#endif //RUNMODEL_H
