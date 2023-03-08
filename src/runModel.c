@@ -6,5 +6,5 @@ void runModel () {
     fprintf(stdout, "Hello\n");
     printf("Enter your age\n");
     scanf("%d", &age);
-    fprintf(stdout, "You are %d years old!", age);
+    fprintf(stdout, "You are %d years old!\n", age);
 }

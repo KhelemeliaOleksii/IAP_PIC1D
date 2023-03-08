@@ -4,9 +4,9 @@
         // Procedure constants //
         /////////////////////////
         // No. of particles
-        #define BIGPRTCL_NMBR 1e5
+        #define SUPERPRTCL_NMBR 1e3
         // Sys. length (or number of cells)
-        #define LENGTH_MAX 100
+        #define CELLS 100
         // Mesh length (or length of a cell)
         #define LENGTH_MESH 1.0e-3 // m (meters)
         // Max no. of timestaps
@@ -19,7 +19,8 @@
         #define DENSITY_FIRST 1e6 // m^3 (meters in power of three)
         // Particle #1 Beam velocity
         #define VELOCITY_FIRST 1.0e8 // m/s (meters per second) 
-
+        // Charge of the first beam particle
+        #define CHARGE_FIRST -1   
         ////////////////////
         // Math constants //
         ////////////////////
