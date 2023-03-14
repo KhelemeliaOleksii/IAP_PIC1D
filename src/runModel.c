@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../include/runModel.h"
 
-void runModel () {
+void RunModel () {
     int age;
     fprintf(stdout, "Hello\n");
     printf("Enter your age\n");
