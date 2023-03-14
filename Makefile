@@ -27,7 +27,7 @@
 
 #Compiler configuration
 CC = gcc
-CFLAGS = -I${INCDIR}
+CFLAGS = -I${INCDIR} -Wall
 LIBS = -lm
 
 #Layout configuration
@@ -39,10 +39,10 @@ SRCDIR = src
 #Project configuraton
 TARGET = run
 
-_DEPS = runModel.h
+_DEPS = runModel.h initSystem.h initSuperParticles.h
 DEPS = ${patsubst %, ${INCDIR}/%, ${_DEPS}}
 
-_OBJ = main.o runModel.o
+_OBJ = main.o runModel.o initSystem.o initSuperParticles.o
 OBJ = ${patsubst %, ${OBJDIR}/%, ${_OBJ}}
 
 #Deployment configuration

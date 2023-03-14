@@ -1,8 +1,14 @@
-#include "runModel.h"
 #include <stdio.h>
+#include "runModel.h"
+#include "initSystem.h"
+#include "initSuperParticles.h"
+int main () {
+    printf("hello\n");
 
-void main () {
-    
+    initSystem(0);
+
+    initSuperParticles();
+
     // to initialize SYSTEM
     //initSystem()
 
@@ -23,4 +29,5 @@ void main () {
     // use initial condition to start calculatiion
     // perform();
 
+    return 0;
 }
