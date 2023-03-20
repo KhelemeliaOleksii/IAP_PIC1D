@@ -39,18 +39,32 @@ SRCDIR = src
 #Project configuraton
 TARGET = run
 
-_DEPS = runModel.h initSystem.h initSuperParticles.h
+# _DEPS = initSystem.h initSuperParticles.h distributeParticles.h
+_DEPS = initSystem.h 
 DEPS = ${patsubst %, ${INCDIR}/%, ${_DEPS}}
 
-_OBJ = main.o runModel.o initSystem.o initSuperParticles.o
+# _OBJ = main.o initSystem.o initSuperParticles.o
+_OBJ = main.o initSystem.o initSuperParticles.o distributeParticles.o
 OBJ = ${patsubst %, ${OBJDIR}/%, ${_OBJ}}
 
 #Deployment configuration
 ${TARGET} : ${OBJ}  
 	${CC} -o $@ $^ ${CFLAGS} ${LIBS}
 
-${OBJDIR}/%.o: ${SRCDIR}/%.c ${DEPS}
-	${CC} -c -o $@ $< ${CFLAGS}
+# ${OBJDIR}/%.o: ${SRCDIR}/%.c ${DEPS}
+# 	${CC} -c -o $@ $< ${CFLAGS}
+${OBJDIR}/main.o : ${SRCDIR}/main.c
+	${CC} -c -o $@ $< -Wall
+
+${OBJDIR}/initSystem.o : ${SRCDIR}/initSystem.c ${INCDIR}/initSystem.h 
+	${CC} -c -o $@ $< -Wall
+
+# ${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h
+${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h ${INCDIR}/distributeParticles.h  
+	${CC} -c -o $@ $< -Wall
+
+${OBJDIR}/distributeParticles.o : ${SRCDIR}/distributeParticles.c ${INCDIR}/distributeParticles.h   
+	${CC} -c -o $@ $< -Wall
 
 .PHONY: clean
 clean : 

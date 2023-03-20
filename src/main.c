@@ -1,16 +1,14 @@
 #include <stdio.h>
-#include "runModel.h"
-#include "initSystem.h"
-#include "initSuperParticles.h"
+#include "../include/initSystem.h"
+#include "../include/initSuperParticles.h"
+
 int main () {
     printf("hello\n");
 
+    // to initialize SYSTEM
     initSystem(0);
 
     initSuperParticles();
-
-    // to initialize SYSTEM
-    //initSystem()
 
     // to initialize LAYOUT of experiment
     //initLayout();

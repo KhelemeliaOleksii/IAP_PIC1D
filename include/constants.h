@@ -33,4 +33,8 @@
         #define ELEM_CHARGE 1.60217663e-19 // C(coulombs)
         #define ELECTRON_MASS 9.1093837e-31 // kg(kilogramms) 
 
+        ///////////////////////////
+        // Performing constants  //
+        ///////////////////////////
+        #define FUNC_NAME_LENGTH = 200
 #endif // CONSTANTS_H

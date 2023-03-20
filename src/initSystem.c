@@ -1,5 +1,4 @@
 #include "../include/initSystem.h"
-#include "../include/initSystem.h"
 #include <stdlib.h>
 #include <stdio.h>
 int initSystem (int needContinue) {
