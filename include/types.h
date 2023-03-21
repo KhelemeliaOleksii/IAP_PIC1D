@@ -9,4 +9,11 @@
     enum boundary_types type;
   };
   
+  struct mesh_node {
+    float coord;
+    float charge;
+    float field_E;
+    float field_B;
+  };
+
 #endif //TYPE_H
