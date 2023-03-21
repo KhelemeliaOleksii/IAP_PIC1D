@@ -44,7 +44,8 @@ _DEPS = initSystem.h
 DEPS = ${patsubst %, ${INCDIR}/%, ${_DEPS}}
 
 # _OBJ = main.o initSystem.o initSuperParticles.o
-_OBJ = main.o initSystem.o initSuperParticles.o distributeParticles.o initLayout.o
+_OBJ = main.o initSystem.o initSuperParticles.o \
+		distributeParticles.o initLayout.o initMesh.o
 OBJ = ${patsubst %, ${OBJDIR}/%, ${_OBJ}}
 
 #Deployment configuration
@@ -61,6 +62,10 @@ ${OBJDIR}/initSystem.o : ${SRCDIR}/initSystem.c ${INCDIR}/initSystem.h
 
 ${OBJDIR}/initLayout.o : ${SRCDIR}/initLayout.c ${INCDIR}/initLayout.h ${INCDIR}/types.h  
 	${CC} -c -o $@ $< -Wall
+
+${OBJDIR}/initMesh.o : ${SRCDIR}/initMesh.c ${INCDIR}/initMesh.h ${INCDIR}/types.h  
+	${CC} -c -o $@ $< -Wall
+
 
 # ${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h
 ${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h ${INCDIR}/distributeParticles.h  
