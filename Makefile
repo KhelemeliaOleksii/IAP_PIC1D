@@ -44,7 +44,7 @@ _DEPS = initSystem.h
 DEPS = ${patsubst %, ${INCDIR}/%, ${_DEPS}}
 
 # _OBJ = main.o initSystem.o initSuperParticles.o
-_OBJ = main.o initSystem.o initSuperParticles.o distributeParticles.o
+_OBJ = main.o initSystem.o initSuperParticles.o distributeParticles.o initLayout.o
 OBJ = ${patsubst %, ${OBJDIR}/%, ${_OBJ}}
 
 #Deployment configuration
@@ -59,12 +59,16 @@ ${OBJDIR}/main.o : ${SRCDIR}/main.c
 ${OBJDIR}/initSystem.o : ${SRCDIR}/initSystem.c ${INCDIR}/initSystem.h 
 	${CC} -c -o $@ $< -Wall
 
+${OBJDIR}/initLayout.o : ${SRCDIR}/initLayout.c ${INCDIR}/initLayout.h ${INCDIR}/types.h  
+	${CC} -c -o $@ $< -Wall
+
 # ${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h
 ${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h ${INCDIR}/distributeParticles.h  
 	${CC} -c -o $@ $< -Wall
 
 ${OBJDIR}/distributeParticles.o : ${SRCDIR}/distributeParticles.c ${INCDIR}/distributeParticles.h   
 	${CC} -c -o $@ $< -Wall
+
 
 .PHONY: clean
 clean : 

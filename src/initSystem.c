@@ -1,13 +1,21 @@
 #include "../include/initSystem.h"
 #include <stdlib.h>
 #include <stdio.h>
-int initSystem (int needContinue) {
-  if (!needContinue) {
+#include <string.h>
+
+int initSystem (int isNeedContinue, char **msg) {
+  strcpy(*msg, "");  
+  strcat (*msg, __func__);    
+
+  if (!isNeedContinue) {
     // to remove previous results
-    system("rm *.dat");
-    fprintf(stdout, "Previous results have been removed!\n"); fflush(stdout);
-    return 0;
+    if (system("rm *.dat") == 0) {
+      strcat (*msg, ": Previous results have been removed!");    
+    }
+    strcat (*msg, "\tOK!");  
+    return 0; 
   }
+
   //do something
-  return 0;
+  return -1;
 }
