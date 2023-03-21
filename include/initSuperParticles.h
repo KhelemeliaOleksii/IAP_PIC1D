@@ -19,5 +19,6 @@
     
     int testString (int size, char **msg);
     
-    int initSuperParticles();
+    int initSuperParticles(int numberSP, int numberMeshCells, float lengthMeshCell, double *SPs_coord, double *SPs_velocity, char** msg);
+    // int initSuperParticles();
 #endif //INITSUPERPARTICLES_H

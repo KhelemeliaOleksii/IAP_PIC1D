@@ -6,5 +6,5 @@
     //              * clear all .dat files with previous results
     //           (needContinue = 1) 
     //              * do ...  
-    int initSystem (int needContinue);
+    int initSystem (int needContinue, char **msg);
 #endif //INITSYSTEM_H

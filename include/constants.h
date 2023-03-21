@@ -4,11 +4,11 @@
         // Procedure constants //
         /////////////////////////
         // No. of particles
-        #define SUPERPRTCL_NMBR 1e3
+        #define SUPERPRTCLS 1e3
         // Sys. length (or number of cells)
-        #define CELLS 100
+        #define MESHCELLS 100
         // Mesh length (or length of a cell)
-        #define LENGTH_MESH 1.0e-3 // m (meters)
+        #define MESHCELL_LENGTH 1.0e-3 // m (meters)
         // Max no. of timestaps
         #define TIME_MAX 500
         // No. of iteractions in poisson solver
@@ -20,7 +20,11 @@
         // Particle #1 Beam velocity
         #define VELOCITY_FIRST 1.0e8 // m/s (meters per second) 
         // Charge of the first beam particle
-        #define CHARGE_FIRST -1   
+        #define CHARGE_FIRST -1  
+        // Border of physical system start
+        #define BORDER_XMIN .0 // m (meters)
+        // Border of physical system end
+        #define BORDER_XMAX 0.1 // m (meters)
         ////////////////////
         // Math constants //
         ////////////////////

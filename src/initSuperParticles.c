@@ -3,7 +3,8 @@
 #include "../include/distributeParticles.h"
 #include <stdio.h>
 
-int initSuperParticles()
+int initSuperParticles(int number_SPs, int numberMeshCells, float lengthMeshCell, double *coords_SPs, double *velocities_SPs, char** msg)
+// int initSuperParticles()
 {
   // array to a description of velocity distribution function
   char vdf_description[200];
@@ -12,12 +13,12 @@ int initSuperParticles()
   char cdf_description[200];
   char *ptr_dcfd = cdf_description;
   // array to particles coord
-  double particles_coord[(int)SUPERPRTCL_NMBR];
+  // double particles_coord[(int)SUPERPRTCL_NMBR];
   // array to particles velocity
-  double particles_velocity[(int)SUPERPRTCL_NMBR];
+  // double particles_velocity[(int)SUPERPRTCL_NMBR];
 
   // Length of plasma
-  double length_total = CELLS * LENGTH_MESH;
+  double length_total = numberMeshCells * lengthMeshCell;
   double plasma_borders[2] = {0, length_total};
   // Real particles (rp) all
   // double rp_all = DENSITY_FIRST * length_total;
@@ -40,12 +41,12 @@ int initSuperParticles()
   // fprintf(stdout, "Plasma borders %e<->%e meters\n", plasma_borders[0], plasma_borders[1]);
   // fflush(stdout);
   
-  initParticlesVelocity(SUPERPRTCL_NMBR, VELOCITY_FIRST, 
+  initParticlesVelocity(number_SPs, VELOCITY_FIRST, 
       VELOCITY_FIRST, VELOCITY_FIRST, 0,
-      distribute1DVelocityUniform, particles_velocity, &ptr_dvfd);
-  for (int i = 0; i < SUPERPRTCL_NMBR; i++)
+      distribute1DVelocityUniform, velocities_SPs, &ptr_dvfd);
+  for (int i = 0; i < number_SPs; i++)
   {
-    printf("V[%d] = %f\t", i, particles_velocity[i]);
+    printf("V[%d] = %f\t", i, velocities_SPs[i]);
     if (i%3 == 0) {
       printf("\n");
     }
@@ -53,14 +54,14 @@ int initSuperParticles()
   
   printf("%s", ptr_dvfd);
 
-  initParticlesCoord(SUPERPRTCL_NMBR, 0, 
+  initParticlesCoord(number_SPs, 0, 
           plasma_borders[0], plasma_borders[1], 0, 
           distribute1DCoordUniform,
-          particles_coord, &ptr_dcfd);
+          coords_SPs, &ptr_dcfd);
 
-  for (int i = 0; i < SUPERPRTCL_NMBR; i++)
+  for (int i = 0; i < number_SPs; i++)
   {
-    printf("x[%d] = %f\t", i, particles_coord[i]);
+    printf("x[%d] = %f\t", i, coords_SPs[i]);
     if (i%3 == 0) {
       printf("\n");
     }
