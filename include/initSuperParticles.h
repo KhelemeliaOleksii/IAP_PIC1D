@@ -1,6 +1,8 @@
 #ifndef INITSUPERPARTICLES_H
   #define INITSUPERPARTICLES_H
 
+    #include "types.h"
+    
     int initParticlesCoord(int particle_number, double beam_position, 
           double min_coord, double max_coord, double coord_spread, 
           int distribute_function(int particle_number, double beam_position, 

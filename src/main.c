@@ -8,6 +8,8 @@
 #include "../include/initSystem.h"
 #include "../include/initLayout.h"
 #include "../include/initMesh.h"
+#include "../include/initRealParticle.h"
+#include "../include/initBeam.h"
 #include "../include/initSuperParticles.h"
 
 int main () {
@@ -40,10 +42,6 @@ int main () {
         exit(1);
     } else {
         printf("%s\n", ptr_procedure_description);
-        // int i=0;
-        // for (i = 0; i < 2; i++){
-        //     printf("Bou %i = %e, type %d\n", i, boundaries[i].value, boundaries[i].type);
-        // }
     };
     
     
@@ -53,37 +51,52 @@ int main () {
     // - error handler
     // - check errors  
     int number_nodes;
-    countMeshCells(MESHCELL_LENGTH, boundaries, &number_nodes);
+    countNodes(MESHCELL_LENGTH, boundaries, &number_nodes);
 
     struct mesh_node *nodes;
-    nodes = (struct mesh_node*)malloc(number_nodes*sizeof(struct mesh_node));
-
+    nodes = (struct mesh_node*)malloc((number_nodes)*sizeof(struct mesh_node));
     if (initMesh(number_nodes, MESHCELL_LENGTH, nodes, &ptr_procedure_description) < 0) {
         printf("ERROR! Exit with failure!\n\t%s\n", ptr_procedure_description );
         exit(1);
     } else {
         printf("%s\n", ptr_procedure_description);
-        int i=0;
-        for (i = 0; i <= number_nodes; i++){
-            printf("node[%d] = %e\n", i, nodes[i].coord);
-        }
     };
-    
 
-    //  // array to particles coord
-    // double particles_coord[(int)SUPERPRTCLS];
-    // // array to particles velocity
-    // double particles_velocity[(int)SUPERPRTCLS];
+    //////////////////////////////////////////////////
+    // to initialize real particle type
+    struct particle_type particle_1;
 
-    // initSuperParticles(SUPERPRTCLS, MESHCELLS, MESHCELL_LENGTH, particles_coord, particles_velocity);
+    // The first type of particle
+    if (initRealParticle(-1, ELEM_CHARGE, 1, ELECTRON_MASS, &particle_1, &ptr_procedure_description) < 0) {
+        printf("ERROR! Exit with failure!\n\t%s\n", ptr_procedure_description );
+        exit(1);
+    } else {
+        printf("%s\n", ptr_procedure_description);
+    };
 
-    // // to initialize LAYOUT of experiment
-    //initLayout();
 
-    // to initialize PARTICLE initial condition 
+    ///////////////////////////////////////////////
+    //to initialize beam parameter
+    struct beam beam_1;
+
+    initBeam(particle_1, VELOCITY_FIRST, uniform_v, 0, boundaries, 0.5, uniform_c, 0, 0.1, 0.1, &beam_1, &ptr_procedure_description);
+    // printf("particle charge %f,\n\t mass %f\n", beam_1.particle.charge, beam_1.particle.mass);
+    // printf("beam velocity %f,\n", beam_1.velocity);
+    // printf("beam velocity distribution function %d,\n", beam_1.velocity_df);
+    // printf("beam velocity spread %f,\n", beam_1.velocity_spread);
+    // printf("beam position %f,\n", beam_1.position_center);
+    // printf("beam coord ditributon function %d,\n", beam_1.coord_df);
+    // printf("beam position spread %f,\n", beam_1.position_spread);
+    // printf("beam offset start %f,\n", beam_1.offset_start);
+    // printf("beam offset end %f,\n", beam_1.offset_end);
+
+    printf("%s\n", ptr_procedure_description);
+
+    //////////////////////////////////////////////////
+    // to initialize SUPER PARTICLES initial condition 
     // - positions
     // - velocities
-    //initParticles();
+    //initSuperParticles();
 
     // to initialize ELECTRO-MAGNETICS FIELDS
     // - eletric fieds E

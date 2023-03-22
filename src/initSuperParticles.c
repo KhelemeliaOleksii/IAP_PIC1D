@@ -2,48 +2,31 @@
 #include "../include/constants.h"
 #include "../include/distributeParticles.h"
 #include <stdio.h>
+#include <math.h>
 
-int initSuperParticles(int number_SPs, int numberMeshCells, float lengthMeshCell, double *coords_SPs, double *velocities_SPs, char** msg)
-// int initSuperParticles()
+int initSuperParticles(int number_SPs, struct beam beam, double *super_particles, char** msg)
 {
-  // array to a description of velocity distribution function
-  char vdf_description[200];
-  char *ptr_dvfd = vdf_description;
-  // array to a description of coord distribution function
-  char cdf_description[200];
-  char *ptr_dcfd = cdf_description;
-  // array to particles coord
-  // double particles_coord[(int)SUPERPRTCL_NMBR];
-  // array to particles velocity
-  // double particles_velocity[(int)SUPERPRTCL_NMBR];
+  strcpy(*msg, "");  
+  strcat (*msg, __func__);    
 
   // Length of plasma
-  double length_total = numberMeshCells * lengthMeshCell;
-  double plasma_borders[2] = {0, length_total};
+  double length_beam = beam.end - beam.start;
+  
   // Real particles (rp) all
-  // double rp_all = DENSITY_FIRST * length_total;
+  double rp_all = DENSITY_FIRST * length_beam;
 
   // Real particles per SuperParticle
-  // double rp_per_sp = rp_all / SUPERPRTCL_NMBR;
+  double rp_per_sp = (int)round(rp_all / number_SPs);
 
   // Charge of SuperParticlse
-  // double charge_sp = CHARGE_FIRST * rp_per_sp * ELEM_CHARGE;
+  double charge_sp = rp_per_sp * beam.particle.charge;
 
   // Mass of SuperParticle
-  // double mass_sp = ELECTRON_MASS * rp_per_sp;
-  
-
-  // fprintf(stdout, "Plasma length is %e m\n", length_total);
-  // fprintf(stdout, "Number of all real particles is %e\n", rp_all);
-  // fprintf(stdout, "Real particles per a SuperPArticle are %e \n", rp_per_sp);
-  // fprintf(stdout, "Charge of a SuperParticle is %e C\n", charge_sp);
-  // fprintf(stdout, "Mass of a SuperParticle is %e kg\n", mass_sp);
-  // fprintf(stdout, "Plasma borders %e<->%e meters\n", plasma_borders[0], plasma_borders[1]);
-  // fflush(stdout);
+  double mass_sp = rp_per_sp * beam.particle.mass;
   
   initParticlesVelocity(number_SPs, VELOCITY_FIRST, 
       VELOCITY_FIRST, VELOCITY_FIRST, 0,
-      distribute1DVelocityUniform, velocities_SPs, &ptr_dvfd);
+      distribute1DVelocityUniform, velocities_SPs, &msg);
   for (int i = 0; i < number_SPs; i++)
   {
     printf("V[%d] = %f\t", i, velocities_SPs[i]);
@@ -52,12 +35,12 @@ int initSuperParticles(int number_SPs, int numberMeshCells, float lengthMeshCell
     }
   }
   
-  printf("%s", ptr_dvfd);
+  printf("%s", msg);
 
   initParticlesCoord(number_SPs, 0, 
           plasma_borders[0], plasma_borders[1], 0, 
           distribute1DCoordUniform,
-          coords_SPs, &ptr_dcfd);
+          coords_SPs, &msg);
 
   for (int i = 0; i < number_SPs; i++)
   {
@@ -67,7 +50,7 @@ int initSuperParticles(int number_SPs, int numberMeshCells, float lengthMeshCell
     }
   }
   
-  printf("%s", ptr_dcfd);
+  printf("%s", msg);
 
   return 0;
 }
