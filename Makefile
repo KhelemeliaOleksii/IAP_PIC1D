@@ -45,8 +45,7 @@ DEPS = ${patsubst %, ${INCDIR}/%, ${_DEPS}}
 
 # _OBJ = main.o initSystem.o initSuperParticles.o
 _OBJ = main.o initSystem.o initLayout.o initMesh.o \
-	initRealParticle.o initBeam.o
-# initSuperParticles.o distributeParticles.o  
+	initRealParticle.o initBeam.o initSuperParticles.o distributeParticles.o  
 OBJ = ${patsubst %, ${OBJDIR}/%, ${_OBJ}}
 
 #Deployment configuration
@@ -73,13 +72,11 @@ ${OBJDIR}/initRealParticle.o : ${SRCDIR}/initRealParticle.c ${INCDIR}/initRealPa
 ${OBJDIR}/initBeam.o : ${SRCDIR}/initBeam.c ${INCDIR}/initBeam.h ${INCDIR}/types.h  
 	${CC} -c -o $@ $< -Wall
 
-# # ${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h
-# ${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h ${INCDIR}/distributeParticles.h  
-# 	${CC} -c -o $@ $< -Wall
+${OBJDIR}/initSuperParticles.o : ${SRCDIR}/initSuperParticles.c ${INCDIR}/initSuperParticles.h ${INCDIR}/distributeParticles.h  
+	${CC} -c -o $@ $< -Wall
 
-# ${OBJDIR}/distributeParticles.o : ${SRCDIR}/distributeParticles.c ${INCDIR}/distributeParticles.h   
-# 	${CC} -c -o $@ $< -Wall
-
+${OBJDIR}/distributeParticles.o : ${SRCDIR}/distributeParticles.c ${INCDIR}/distributeParticles.h   
+	${CC} -c -o $@ $< -Wall
 
 .PHONY: clean
 clean : 

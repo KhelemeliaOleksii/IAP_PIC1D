@@ -21,7 +21,7 @@
     double charge;
   }; 
   
-  enum velocity_distr_function{uniform_v = 0, gauss =1};
+  enum velocity_distr_function{uniform_v = 0, gauss_v =1};
   
   enum coord_distr_function{uniform_c = 0, solid_bunch = 1, gauss_bunch =2};
 
@@ -44,6 +44,7 @@
     double charge;
     double velocity;
     double coord;
+    double width;
   };
 
 #endif //TYPE_H

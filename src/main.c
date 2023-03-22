@@ -96,7 +96,13 @@ int main () {
     // to initialize SUPER PARTICLES initial condition 
     // - positions
     // - velocities
-    //initSuperParticles();
+    struct super_particle super_particles[(int)SUPERPRTCLS];
+
+    enum velocity_distr_function velocity_df = uniform_v;
+  
+    enum coord_distr_function coord_df = uniform_c;
+
+    initSuperParticles((int)SUPERPRTCLS, beam_1,velocity_df, coord_df, &super_particles, &ptr_procedure_description);
 
     // to initialize ELECTRO-MAGNETICS FIELDS
     // - eletric fieds E

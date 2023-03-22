@@ -4,10 +4,16 @@
 #include <stdio.h>
 #include <math.h>
 
-int initSuperParticles(int number_SPs, struct beam beam, double *super_particles, char** msg)
+int initSuperParticles(const int number_SPs, const struct beam beam, 
+  const enum velocity_distr_function velocity_df,   
+  const enum coord_distr_function coord_df,
+  struct super_particle *particles, char** msg)
 {
   strcpy(*msg, "");  
-  strcat (*msg, __func__);    
+  strcat (*msg, __func__);      
+
+  double velocities_SPs[number_SPs];
+  double coords_SPs[number_SPs];
 
   // Length of plasma
   double length_beam = beam.end - beam.start;
@@ -23,34 +29,61 @@ int initSuperParticles(int number_SPs, struct beam beam, double *super_particles
 
   // Mass of SuperParticle
   double mass_sp = rp_per_sp * beam.particle.mass;
-  
-  initParticlesVelocity(number_SPs, VELOCITY_FIRST, 
+
+  // Width of SuperParticle
+  double width = length_beam / number_SPs;
+
+  switch (velocity_df)
+  {
+  case uniform_v:
+    initParticlesVelocity(number_SPs, VELOCITY_FIRST, 
+        VELOCITY_FIRST, VELOCITY_FIRST, 0,
+        distribute1DVelocityUniform, velocities_SPs, &msg);
+    break;
+  case gauss_v:
+    initParticlesVelocity(number_SPs, VELOCITY_FIRST, 
       VELOCITY_FIRST, VELOCITY_FIRST, 0,
       distribute1DVelocityUniform, velocities_SPs, &msg);
+    break;  
+  default:
+    initParticlesVelocity(number_SPs, VELOCITY_FIRST, 
+        VELOCITY_FIRST, VELOCITY_FIRST, 0,
+        distribute1DVelocityUniform, velocities_SPs, &msg);
+    break;
+  }
+
+  switch (coord_df)
+  {
+  case uniform_c:
+    initParticlesCoord(number_SPs, 0, 
+      beam.start, beam.end, 0, 
+      distribute1DCoordUniform,
+      coords_SPs, &msg);
+    break;
+  case solid_bunch:
+    initParticlesCoord(number_SPs, 0, 
+      beam.start, beam.end, 0, 
+      distribute1DCoordUniform,
+      coords_SPs, &msg);
+    break;
+  
+  default:
+    initParticlesCoord(number_SPs, 0, 
+      beam.start, beam.end, 0, 
+      distribute1DCoordUniform,
+      coords_SPs, &msg);
+    break;
+  }
+
   for (int i = 0; i < number_SPs; i++)
   {
-    printf("V[%d] = %f\t", i, velocities_SPs[i]);
-    if (i%3 == 0) {
-      printf("\n");
-    }
+    particles[i].charge = charge_sp;
+    particles[i].mass = mass_sp;
+    particles[i].coord = coords_SPs[i];
+    particles[i].velocity = velocities_SPs[i];
+    particles[i].width = width;
   }
   
-  printf("%s", msg);
-
-  initParticlesCoord(number_SPs, 0, 
-          plasma_borders[0], plasma_borders[1], 0, 
-          distribute1DCoordUniform,
-          coords_SPs, &msg);
-
-  for (int i = 0; i < number_SPs; i++)
-  {
-    printf("x[%d] = %f\t", i, coords_SPs[i]);
-    if (i%3 == 0) {
-      printf("\n");
-    }
-  }
-  
-  printf("%s", msg);
 
   return 0;
 }

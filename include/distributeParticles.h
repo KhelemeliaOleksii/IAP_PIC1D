@@ -1,6 +1,8 @@
 #ifndef DISTRIBUTEPARTICLES_H
   #define DISTRIBUTEPARTICLES_H
 
+    #include <string.h>
+
     int distribute1DVelocityUniform(int particle_number, double beam_velocity, 
         double min_velocity, double max_velocity, double spread, 
         double* particle_velocity, char**description);
