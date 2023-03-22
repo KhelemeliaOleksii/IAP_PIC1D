@@ -4,7 +4,7 @@
 
 #include "../include/initMesh.h"
 
-int initMesh(const int number_cells, const float length_mesh_cell, struct mesh_node *nodes, char **msg){
+int initMesh(const int number_nodes, const double length_mesh_cell, struct mesh_node *nodes, char **msg){
   strcpy(*msg, "");  
   strcat (*msg, __func__);  
 
@@ -13,7 +13,7 @@ int initMesh(const int number_cells, const float length_mesh_cell, struct mesh_n
     return -1;
   } 
 
-  for (int i = 0; i <= number_cells; i++){
+  for (int i = 0; i < number_nodes; i++){
     nodes[i].coord = i*length_mesh_cell; 
   }
 
@@ -21,6 +21,6 @@ int initMesh(const int number_cells, const float length_mesh_cell, struct mesh_n
   return 0;
 }
 
-void countMeshCells (const float length_mesh_cell, const struct boundary borders[], int *number){
-    *number = (int)round((borders[1].value - borders[0].value) / length_mesh_cell);
+void countNodes(const double length_mesh_cell, const struct boundary borders[], int *number){
+    *number = (int)round((borders[1].value - borders[0].value) / length_mesh_cell)+1;
 }
