@@ -15,6 +15,6 @@ int initRealParticle(const int charge, const double charge_unit,
   }
   particle->mass = mass;
 
-  strcat (*msg, "\tOK!\tParticle has been initialized.");    
+  strcat (*msg, "\n\t\tOK!\tParticle has been initialized.");    
   return 0;
 }

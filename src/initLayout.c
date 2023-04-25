@@ -16,6 +16,6 @@ int initLayout(double border_start, enum boundary_types type_border_start,
   borders[1].value = border_end;
   borders[1].type = type_border_end;
 
-  strcat (*msg, "\tOK!\tBorders have been created!");
+  strcat (*msg, "\n\t\tOK!\tBorders have been created!");
   return 0;
 }

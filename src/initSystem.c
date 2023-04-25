@@ -12,7 +12,7 @@ int initSystem (int isNeedContinue, char **msg) {
     if (system("rm *.dat") == 0) {
       strcat (*msg, ": Previous results have been removed!");    
     }
-    strcat (*msg, "\tOK!");  
+    strcat (*msg, "\n\t\tOK!");  
     return 0; 
   }
 

@@ -18,11 +18,11 @@ int initBeam ( struct particle_type particle,
   beam_ptr->velocity_spread = beam_velocity_spread;
   beam_ptr->position_center = length*position_center;
   beam_ptr->coord_df = coord_distr_function;
-   beam_ptr->position_spread = coord_spread;
+  beam_ptr->position_spread = coord_spread;
   beam_ptr->start = 0 + length*offset_start;
   beam_ptr->end = length - length*offset_end;
 
-  strcat (*msg, "\tOK!\tBeam have been created!");
+  strcat (*msg, "\n\t\tOK!\tBeam have been created!");
 
   return 0;
 }

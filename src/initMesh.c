@@ -17,7 +17,7 @@ int initMesh(const int number_nodes, const double length_mesh_cell, struct mesh_
     nodes[i].coord = i*length_mesh_cell; 
   }
 
-  strcat (*msg, "\tOK!\tThe mesh have been created"); 
+  strcat (*msg, "\n\t\tOK!\tThe mesh have been created"); 
   return 0;
 }
 

@@ -97,13 +97,19 @@ int main () {
     // - positions
     // - velocities
     struct super_particle super_particles[(int)SUPERPRTCLS];
-
     enum velocity_distr_function velocity_df = uniform_v;
-  
     enum coord_distr_function coord_df = uniform_c;
-
-    initSuperParticles((int)SUPERPRTCLS, beam_1,velocity_df, coord_df, &super_particles, &ptr_procedure_description);
-
+    initSuperParticles((int)SUPERPRTCLS, beam_1, velocity_df, coord_df, super_particles, &ptr_procedure_description);
+    printf("%s\n", ptr_procedure_description);
+    
+    // for (int i = 0; i<(int)SUPERPRTCLS; i+=1) {
+    //     printf("coord %f,\t velocity %f,\t charge %f,\t mass %f,\t width = %f\n", 
+    //             super_particles[i].coord, super_particles[i].velocity, 
+    //             super_particles[i].charge, super_particles[i].mass, 
+    //             super_particles[i].width);
+    // }
+    
+ 
     // to initialize ELECTRO-MAGNETICS FIELDS
     // - eletric fieds E
     // - magnetic fields B
